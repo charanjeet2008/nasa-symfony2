@@ -1,3 +1,8 @@
+neo_test:
+    resource: "@NeoTestBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 nasa:
     resource: "@NasaBundle/Controller/"
     type:     annotation
