@@ -1,0 +1,26 @@
+services:
+    nasa.neo.base.uri.builder:
+        class: Neo\NasaBundle\Service\Neo\URI\BaseURIBuilder
+        arguments: ['%nasa.neo.api_host%', '%nasa.neo.api_key%', '%nasa.neo.api_path%']
+
+    nasa.neo.filter.collector:
+        class: Neo\NasaBundle\Service\Neo\URI\FilterCollector
+
+    nasa.neo.fetch.uri.builder:
+        class: Neo\NasaBundle\Service\Neo\URI\FetchURIBuilder
+        arguments: ['@nasa.neo.base.uri.builder']
+
+    nasa.neo.fetch.api.caller:
+        class: Neo\NasaBundle\Service\Neo\Call\FetchAPICaller
+        arguments: ['@nasa.neo.fetch.uri.builder']
+
+    nasa.neo.collector:
+        class: Neo\NasaBundle\Service\Neo\Response\NeoCollector
+
+    nasa.neo.fetch.response.handler:
+        class: Neo\NasaBundle\Service\Neo\Response\FetchResponseHandler
+        arguments: ['@nasa.neo.collector']
+
+    nasa.neo.downloader:
+        class: Neo\NasaBundle\Service\Neo\Downloader
+        arguments: ['@nasa.neo.fetch.api.caller', '@nasa.neo.fetch.response.handler']

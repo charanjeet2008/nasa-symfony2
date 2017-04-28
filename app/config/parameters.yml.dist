@@ -3,8 +3,11 @@
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            PlvhBhaDnmDHTNzjePDqIYHBUOFPZM
 
     # MongoDB
     mongodb.server: "mongodb://localhost:27017"
-    mongodb.default_database: "test"
+    mongodb.default_database: "nasa"
+    nasa_api_host: 'https://api.nasa.gov/neo/'
+    nasa_api_key: 'N7LkblDsc5aen05FJqBQ8wU4qSdmsftwJagVK7UD'
+    nasa_api_path: 'rest/v1/feed/'
