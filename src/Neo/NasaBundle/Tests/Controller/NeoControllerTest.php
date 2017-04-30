@@ -9,11 +9,18 @@
 
 namespace Neo\NasaBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class NeoControllerTest extends WebTestCase
 {
+    public function setUp() {
+        $classes = array(
+            'Neo\NasaBundle\DataFixtures\MongoDB\DataLoader'
+        );
+        $this->loadFixtures($classes, null, 'doctrine_mongodb');
+
+    }
     public function testGetHazardous()
     {
         $client = static::createClient();
@@ -25,15 +32,20 @@ class NeoControllerTest extends WebTestCase
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
         $this->assertSame('application/json', $response->headers->get('Content-Type'));
 
-        if ($response->getContent() == '{}') return;
+        $responseContent = $response->getContent();
+        if ($responseContent == '{}') return;
 
-        $this->assertContains('"id"', $response->getContent());
-        $this->assertContains('"date"', $response->getContent());
-        $this->assertContains('"neo_reference_id"', $response->getContent());
-        $this->assertContains('"name"', $response->getContent());
-        $this->assertContains('"speed"', $response->getContent());
-        $this->assertContains('"is_hazardous"', $response->getContent());
+        $this->assertContains('"id"', $responseContent);
+        $this->assertContains('"date"', $responseContent);
+        $this->assertContains('"neo_reference_id"', $responseContent);
+        $this->assertContains('"name"', $responseContent);
+        $this->assertContains('"speed"', $responseContent);
+        $this->assertContains('"is_hazardous"', $responseContent);
 
+        $neos = json_decode($responseContent);
+        $this->assertSame(2, count($neos));
+        $this->assertSame('3744792', $neos[0]->name);
+        $this->assertSame('789837', $neos[1]->name);
     }
 
     public function testGetFastest()
@@ -47,15 +59,20 @@ class NeoControllerTest extends WebTestCase
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
         $this->assertSame('application/json', $response->headers->get('Content-Type'));
 
-        if ($response->getContent() == '{}') return;
+        $responseContent = $response->getContent();
+        if ($responseContent == '{}') return;
 
-        $this->assertContains('"id"', $response->getContent());
-        $this->assertContains('"date"', $response->getContent());
-        $this->assertContains('"neo_reference_id"', $response->getContent());
-        $this->assertContains('"name"', $response->getContent());
-        $this->assertContains('"speed"', $response->getContent());
-        $this->assertContains('"is_hazardous"', $response->getContent());
+        $this->assertContains('"id"', $responseContent);
+        $this->assertContains('"date"', $responseContent);
+        $this->assertContains('"neo_reference_id"', $responseContent);
+        $this->assertContains('"name"', $responseContent);
+        $this->assertContains('"speed"', $responseContent);
+        $this->assertContains('"is_hazardous"', $responseContent);
 
+        $neos = json_decode($responseContent);
+
+        $this->assertSame(1, count($neos));
+        $this->assertSame('3744792', $neos->name);
 
     }
 }

@@ -28,7 +28,7 @@ class PersistNeoCommandTest extends WebTestCase
                                     ->getManager();
 
         $classes = array(
-            'Neo\NasaBundle\DataFixtures\MongoDB\FixtureLoader'
+            'Neo\NasaBundle\DataFixtures\MongoDB\DataWiper'
         );
         $this->loadFixtures($classes, null, 'doctrine_mongodb');
     }
