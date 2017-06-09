@@ -1,0 +1,4 @@
+services:
+#    neo_test.example:
+#        class: Neo\TestBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

@@ -2,6 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@NasaBundle/Resources/config/services.yml" }
+    - { resource: "@NeoTestBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -45,3 +47,8 @@ doctrine_mongodb:
     document_managers:
         default:
             auto_mapping: true
+nasa:
+    neo:
+        api_host: '%nasa_api_host%'
+        api_key: '%nasa_api_key%'
+        api_path: '%nasa_api_path%'

@@ -11,6 +11,13 @@ framework:
 web_profiler:
     toolbar: false
     intercept_redirects: false
-
-swiftmailer:
-    disable_delivery: true
+# Doctrine MongoDB
+doctrine_mongodb:
+    connections:
+        default:
+            server: "%mongodb.server%"
+            options: {}
+    default_database: "test_nasa"
+    document_managers:
+        default:
+            auto_mapping: true
